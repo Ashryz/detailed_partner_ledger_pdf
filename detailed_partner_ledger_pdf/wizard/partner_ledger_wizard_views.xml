@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <record id="view_detailed_partner_ledger_wizard_form" model="ir.ui.view">
+        <field name="name">detailed.partner.ledger.wizard.form</field>
+        <field name="model">detailed.partner.ledger.wizard</field>
+        <field name="arch" type="xml">
+            <form string="Partner Ledger">
+                <group>
+                    <group>
+                        <field name="company_id"/>
+                        <field name="date_from"/>
+                        <field name="date_to"/>
+                        <field name="target_move" widget="radio"/>
+                    </group>
+                    <group>
+                        <field name="result_selection"/>
+                        <field name="reconciled"/>
+                        <field name="detailed"/>
+                        <field name="summarized"/>
+                    </group>
+                </group>
+                <group>
+                    <field name="journal_ids" widget="many2many_tags"/>
+                    <field name="partner_ids" widget="many2many_tags"
+                           required="not summarized"/>
+                </group>
+                <footer>
+                    <button name="action_print_report" string="Print"
+                            type="object" class="btn-primary"/>
+                    <button string="Cancel" class="btn-secondary" special="cancel"/>
+                </footer>
+            </form>
+        </field>
+    </record>
+
+    <record id="action_detailed_partner_ledger_wizard" model="ir.actions.act_window">
+        <field name="name">Partner Ledger (PDF)</field>
+        <field name="res_model">detailed.partner.ledger.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_detailed_partner_ledger_wizard_form"/>
+        <field name="target">new</field>
+    </record>
+
+    <record id="action_detailed_partner_ledger_wizard_partner_binding"
+            model="ir.actions.act_window">
+        <field name="name">Partner Ledger (PDF)</field>
+        <field name="res_model">detailed.partner.ledger.wizard</field>
+        <field name="view_mode">form</field>
+        <field name="view_id" ref="view_detailed_partner_ledger_wizard_form"/>
+        <field name="binding_model_id" ref="base.model_res_partner"/>
+        <field name="binding_view_types">list,form</field>
+        <field name="context">{'default_partner_ids': active_ids}</field>
+        <field name="target">new</field>
+    </record>
+
+    <menuitem id="menu_detailed_partner_ledger_pdf"
+              name="Partner Ledger (PDF)"
+              parent="account.account_reports_partners_reports_menu"
+              action="action_detailed_partner_ledger_wizard"
+              sequence="20"
+              />
+
+</odoo>

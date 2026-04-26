@@ -1,0 +1,293 @@
+# Translation of Odoo Server.
+# This file contains the translation of the following modules:
+# 	* detailed_partner_ledger_pdf
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: Odoo Server 18.0+e\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2026-04-26 16:01+0000\n"
+"PO-Revision-Date: 2026-04-26 16:01+0000\n"
+"Last-Translator: \n"
+"Language-Team: \n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: \n"
+"Plural-Forms: \n"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model,name:detailed_partner_ledger_pdf.model_detailed_partner_ledger_wizard
+msgid " Detailed Partner Ledger Wizard"
+msgstr "معالج دفتر الأستاذ التفصيلي للشريك"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "<em>Initial Balance</em>"
+msgstr "<em>الرصيد الافتتاحي</em>"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "<strong>Company:</strong>"
+msgstr "<strong>الشركة:</strong>"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "<strong>Date from:</strong>"
+msgstr "<strong>التاريخ من:</strong>"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "<strong>Date to:</strong>"
+msgstr "<strong>التاريخ إلى:</strong>"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "<strong>Invoice:</strong>"
+msgstr "<strong>الفاتورة:</strong>"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "<strong>Target Moves:</strong>"
+msgstr "<strong>الحركات المستهدفة:</strong>"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "<strong>Total:</strong>"
+msgstr "<strong>الإجمالي:</strong>"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "<strong>Totals</strong>"
+msgstr "<strong>الإجماليات</strong>"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "<strong>Untaxed:</strong>"
+msgstr "<strong>غير خاضع للضريبة:</strong>"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields.selection,name:detailed_partner_ledger_pdf.selection__detailed_partner_ledger_wizard__target_move__all
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "All Entries"
+msgstr "جميع الإدخالات"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields.selection,name:detailed_partner_ledger_pdf.selection__detailed_partner_ledger_wizard__target_move__posted
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "All Posted Entries"
+msgstr "جميع الإدخالات المرحلة"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Balance"
+msgstr "الرصيد"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.view_detailed_partner_ledger_wizard_form
+msgid "Cancel"
+msgstr "إلغاء"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__company_id
+msgid "Company"
+msgstr "الشركة"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__create_uid
+msgid "Created by"
+msgstr "تم الإنشاء بواسطة"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__create_date
+msgid "Created on"
+msgstr "تاريخ الإنشاء"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Credit"
+msgstr "دائن"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Date"
+msgstr "التاريخ"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Debit"
+msgstr "مدين"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__display_name
+msgid "Display Name"
+msgstr "اسم العرض"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__date_to
+msgid "End Date"
+msgstr "تاريخ الانتهاء"
+
+#. module: detailed_partner_ledger_pdf
+#. odoo-python
+#: code:addons/detailed_partner_ledger_pdf/report/partner_ledger_report.py:0
+msgid "Form content is missing, this report cannot be printed."
+msgstr "محتوى النموذج مفقود، لا يمكن طباعة هذا التقرير."
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__id
+msgid "ID"
+msgstr "المعرف"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__reconciled
+msgid "Include Reconciled Entries"
+msgstr "تضمين الإدخالات المطابقة"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__journal_ids
+msgid "Journals"
+msgstr "الدفاتر"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__write_uid
+msgid "Last Updated by"
+msgstr "آخر تحديث بواسطة"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__write_date
+msgid "Last Updated on"
+msgstr "تاريخ آخر تحديث"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Partner"
+msgstr "الشريك"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.view_detailed_partner_ledger_wizard_form
+msgid "Partner Ledger"
+msgstr "دفتر أستاذ الشريك"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.actions.act_window,name:detailed_partner_ledger_pdf.action_detailed_partner_ledger_wizard
+#: model:ir.actions.act_window,name:detailed_partner_ledger_pdf.action_detailed_partner_ledger_wizard_partner_binding
+#: model:ir.actions.report,name:detailed_partner_ledger_pdf.action_partner_ledger_pdf
+#: model:ir.ui.menu,name:detailed_partner_ledger_pdf.menu_detailed_partner_ledger_pdf
+msgid "Partner Ledger (PDF)"
+msgstr "دفتر أستاذ الشريك (PDF)"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Partner Ledger - Summarized"
+msgstr "دفتر أستاذ الشريك - ملخص"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model,name:detailed_partner_ledger_pdf.model_account_partner_ledger_report_handler
+msgid "Partner Ledger Custom Handler"
+msgstr "المعالج المخصص لدفتر الأستاذ العام الخاص بالشريك "
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model,name:detailed_partner_ledger_pdf.model_report_detailed_partner_ledger_pdf_report_partner_ledger
+msgid "Partner Ledger PDF"
+msgstr "دفتر أستاذ الشريك PDF"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__result_selection
+msgid "Partner's"
+msgstr "حسابات الشركاء"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__partner_ids
+msgid "Partners"
+msgstr "الشركاء"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields.selection,name:detailed_partner_ledger_pdf.selection__detailed_partner_ledger_wizard__result_selection__supplier
+msgid "Payable Accounts"
+msgstr "حسابات دائنة"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.view_detailed_partner_ledger_wizard_form
+msgid "Print"
+msgstr "طباعة"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,help:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__summarized
+msgid "Print one row per partner with totals only."
+msgstr "طباعة صف واحد لكل شريك مع الإجماليات فقط."
+
+#. module: detailed_partner_ledger_pdf
+#. odoo-python
+#: code:addons/detailed_partner_ledger_pdf/models/account_partner_ledger.py:0
+msgid "Product"
+msgstr "المنتج"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Qty:"
+msgstr "الكمية:"
+
+#. module: detailed_partner_ledger_pdf
+#. odoo-python
+#: code:addons/detailed_partner_ledger_pdf/models/account_partner_ledger.py:0
+msgid "Quantity"
+msgstr "الكمية"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields.selection,name:detailed_partner_ledger_pdf.selection__detailed_partner_ledger_wizard__result_selection__customer
+msgid "Receivable Accounts"
+msgstr "حسابات مدينة"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields.selection,name:detailed_partner_ledger_pdf.selection__detailed_partner_ledger_wizard__result_selection__customer_supplier
+msgid "Receivable and Payable Accounts"
+msgstr "حسابات مدينة ودائنة"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Ref"
+msgstr "المرجع"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__detailed
+msgid "Show Invoice Lines"
+msgstr "إظهار بنود الفاتورة"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__date_from
+msgid "Start Date"
+msgstr "تاريخ البدء"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Subtotal:"
+msgstr "المجموع الفرعي:"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__summarized
+msgid "Summarized"
+msgstr "ملخص"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,field_description:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__target_move
+msgid "Target Moves"
+msgstr "الحركات المستهدفة"
+
+#. module: detailed_partner_ledger_pdf
+#. odoo-python
+#: code:addons/detailed_partner_ledger_pdf/models/account_partner_ledger.py:0
+msgid "Unit Price"
+msgstr "سعر الوحدة"
+
+#. module: detailed_partner_ledger_pdf
+#: model_terms:ir.ui.view,arch_db:detailed_partner_ledger_pdf.report_partner_ledger
+msgid "Unit:"
+msgstr "الوحدة:"
+
+#. module: detailed_partner_ledger_pdf
+#: model:ir.model.fields,help:detailed_partner_ledger_pdf.field_detailed_partner_ledger_wizard__detailed
+msgid ""
+"When the journal item belongs to a customer or vendor invoice, display the "
+"invoice header and product lines below it."
+msgstr "عندما ينتمي بند دفتر اليومية إلى فاتورة عميل أو مورد، اعرض رأس الفاتورة وبنود المنتج أسفلها."

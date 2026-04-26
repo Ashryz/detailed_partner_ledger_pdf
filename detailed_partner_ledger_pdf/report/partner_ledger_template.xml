@@ -1,0 +1,239 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+
+    <template id="report_partner_ledger">
+        <t t-call="web.html_container">
+
+            <!-- Summarized: one row per partner -->
+            <t t-if="data['form'].get('summarized')">
+                <t t-call="web.internal_layout">
+                    <div class="page">
+                        <h2>Partner Ledger - Summarized</h2>
+                        <div class="row mb-3">
+                            <div class="col-4">
+                                <strong>Company:</strong>
+                                <span t-out="company.name"/>
+                            </div>
+                            <div class="col-4">
+                                <t t-if="data['form']['date_from']">
+                                    <strong>Date from:</strong>
+                                    <span t-out="data['form']['date_from']"/><br/>
+                                </t>
+                                <t t-if="data['form']['date_to']">
+                                    <strong>Date to:</strong>
+                                    <span t-out="data['form']['date_to']"/>
+                                </t>
+                            </div>
+                            <div class="col-4">
+                                <strong>Target Moves:</strong>
+                                <span t-if="data['form']['target_move'] == 'all'">All Entries</span>
+                                <span t-if="data['form']['target_move'] == 'posted'">All Posted Entries</span>
+                            </div>
+                        </div>
+                        <table class="table table-sm">
+                            <thead>
+                                <tr>
+                                    <th>Partner</th>
+                                    <th class="text-end">Debit</th>
+                                    <th class="text-end">Credit</th>
+                                    <th class="text-end">Balance</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <t t-set="tot_dr" t-value="0.0"/>
+                                <t t-set="tot_cr" t-value="0.0"/>
+                                <t t-foreach="docs" t-as="o">
+                                    <t t-set="sums" t-value="sum_partner(data, o)"/>
+                                    <t t-set="ini_bal" t-value="get_initial_balance(data, o)"/>
+                                    <tr>
+                                        <td>
+                                            <span t-if="o.ref"><strong t-out="o.ref"/> - </span>
+                                            <strong t-out="o.name"/>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="sums['debit'] + ini_bal['debit']"
+                                                  t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="sums['credit'] + ini_bal['credit']"
+                                                  t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="sums['balance'] + ini_bal['balance']"
+                                                  t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="tot_dr" t-value="tot_dr + sums['debit'] + ini_bal['debit']"/>
+                                    <t t-set="tot_cr" t-value="tot_cr + sums['credit'] + ini_bal['credit']"/>
+                                </t>
+                                <tr class="table-active">
+                                    <td><strong>Totals</strong></td>
+                                    <td class="text-end">
+                                        <strong t-out="tot_dr"
+                                                t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                    </td>
+                                    <td class="text-end">
+                                        <strong t-out="tot_cr"
+                                                t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                    </td>
+                                    <td class="text-end">
+                                        <strong t-out="tot_dr - tot_cr"
+                                                t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </t>
+            </t>
+
+            <!-- Detailed: one page per partner -->
+            <t t-if="not data['form'].get('summarized')">
+                <t t-foreach="docs" t-as="o">
+                    <t t-call="web.internal_layout">
+                        <div class="page">
+                            <h2>Partner Ledger</h2>
+                            <div class="row mb-3">
+                                <div class="col-4">
+                                    <strong>Company:</strong>
+                                    <span t-out="company.name"/>
+                                </div>
+                                <div class="col-4">
+                                    <t t-if="data['form']['date_from']">
+                                        <strong>Date from:</strong>
+                                        <span t-out="data['form']['date_from']"/><br/>
+                                    </t>
+                                    <t t-if="data['form']['date_to']">
+                                        <strong>Date to:</strong>
+                                        <span t-out="data['form']['date_to']"/>
+                                    </t>
+                                </div>
+                                <div class="col-4">
+                                    <strong>Target Moves:</strong>
+                                    <span t-if="data['form']['target_move'] == 'all'">All Entries</span>
+                                    <span t-if="data['form']['target_move'] == 'posted'">All Posted Entries</span>
+                                </div>
+                            </div>
+
+                            <table class="table table-sm">
+                                <thead>
+                                    <tr class="table-secondary">
+                                        <th class="text-nowrap">Date</th>
+                                        <th>Ref</th>
+                                        <th class="text-end">Debit</th>
+                                        <th class="text-end">Credit</th>
+                                        <th class="text-end">Balance</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr class="table-active">
+                                        <td colspan="5" class="text-center">
+                                            <span t-if="o.ref"><strong t-out="o.ref"/> - </span>
+                                            <strong t-out="o.name"/>
+                                        </td>
+                                    </tr>
+                                    <t t-set="ini_bal" t-value="get_initial_balance(data, o)"/>
+                                    <tr t-if="data['form']['date_from']">
+                                        <td colspan="2"><em>Initial Balance</em></td>
+                                        <td class="text-end">
+                                            <span t-out="ini_bal['debit']"
+                                                  t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="ini_bal['credit']"
+                                                  t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="ini_bal['balance']"
+                                                  t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                        </td>
+                                    </tr>
+
+                                    <t t-foreach="lines(data, o)" t-as="line">
+                                        <tr>
+                                            <td class="text-nowrap"><span t-out="line['date']"/></td>
+                                            <td><span t-out="line['displayed_name']"/></td>
+                                            <td class="text-end">
+                                                <span t-out="line['debit']"
+                                                      t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                            </td>
+                                            <td class="text-end">
+                                                <span t-out="line['credit']"
+                                                      t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                            </td>
+                                            <td class="text-end">
+                                                <span t-out="line['progress'] + ini_bal['balance']"
+                                                      t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                            </td>
+                                        </tr>
+
+                                        <!-- Invoice header + product lines -->
+                                        <t t-if="data['form'].get('detailed') and line['invoice']">
+                                            <tr class="table-info">
+                                                <td/>
+                                                <td>
+                                                    <strong>Invoice:</strong>
+                                                    <span t-out="line['invoice'].name"/>
+                                                </td>
+                                                <td>
+                                                    <strong>Untaxed:</strong>
+                                                    <span t-out="line['invoice'].amount_untaxed"
+                                                          t-options='{"widget": "monetary", "display_currency": line["invoice"].currency_id}'/>
+                                                </td>
+                                                <td colspan="2" class="text-end">
+                                                    <strong>Total:</strong>
+                                                    <span t-out="line['invoice'].amount_total"
+                                                          t-options='{"widget": "monetary", "display_currency": line["invoice"].currency_id}'/>
+                                                </td>
+                                            </tr>
+                                            <tr t-foreach="line['ilines']" t-as="iline" class="table-light">
+                                                <td/>
+                                                <td class="ps-4">
+                                                    <span t-out="iline.product_id.display_name or iline.name"/>
+                                                </td>
+                                                <td>
+                                                    Qty: <span t-out="iline.quantity"/>
+                                                </td>
+                                                <td>
+                                                    Unit: <span t-out="iline.price_unit"
+                                                                t-options='{"widget": "monetary", "display_currency": iline.currency_id}'/>
+                                                </td>
+                                                <td class="text-end">
+                                                    Subtotal: <span t-out="iline.price_subtotal"
+                                                                    t-options='{"widget": "monetary", "display_currency": iline.currency_id}'/>
+                                                </td>
+                                            </tr>
+                                        </t>
+                                    </t>
+
+                                    <t t-set="sums" t-value="sum_partner(data, o)"/>
+                                    <tr class="table-active">
+                                        <td colspan="2">
+                                            <strong>Totals</strong>
+                                            <span t-if="o.ref"> - <span t-out="o.ref"/></span>
+                                            - <span t-out="o.name"/>
+                                        </td>
+                                        <td class="text-end">
+                                            <strong t-out="sums['debit'] + ini_bal['debit']"
+                                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                        </td>
+                                        <td class="text-end">
+                                            <strong t-out="sums['credit'] + ini_bal['credit']"
+                                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                        </td>
+                                        <td class="text-end">
+                                            <strong t-out="sums['balance'] + ini_bal['balance']"
+                                                    t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </t>
+                </t>
+            </t>
+
+        </t>
+    </template>
+
+</odoo>
