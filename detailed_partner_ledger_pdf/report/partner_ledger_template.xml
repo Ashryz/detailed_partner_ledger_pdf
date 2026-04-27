@@ -34,12 +34,14 @@
                             <thead>
                                 <tr>
                                     <th>Partner</th>
+                                    <th class="text-end">Initial Balance</th>
                                     <th class="text-end">Debit</th>
                                     <th class="text-end">Credit</th>
                                     <th class="text-end">Balance</th>
                                 </tr>
                             </thead>
                             <tbody>
+                                <t t-set="tot_ini" t-value="0.0"/>
                                 <t t-set="tot_dr" t-value="0.0"/>
                                 <t t-set="tot_cr" t-value="0.0"/>
                                 <t t-foreach="docs" t-as="o">
@@ -49,6 +51,10 @@
                                         <td>
                                             <span t-if="o.ref"><strong t-out="o.ref"/> - </span>
                                             <strong t-out="o.name"/>
+                                        </td>
+                                        <td class="text-end">
+                                            <span t-out="ini_bal['balance']"
+                                                  t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
                                         </td>
                                         <td class="text-end">
                                             <span t-out="sums['debit'] + ini_bal['debit']"
@@ -63,11 +69,16 @@
                                                   t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
                                         </td>
                                     </tr>
+                                    <t t-set="tot_ini" t-value="tot_ini + ini_bal['balance']"/>
                                     <t t-set="tot_dr" t-value="tot_dr + sums['debit'] + ini_bal['debit']"/>
                                     <t t-set="tot_cr" t-value="tot_cr + sums['credit'] + ini_bal['credit']"/>
                                 </t>
                                 <tr class="table-active">
                                     <td><strong>Totals</strong></td>
+                                    <td class="text-end">
+                                        <strong t-out="tot_ini"
+                                                t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
+                                    </td>
                                     <td class="text-end">
                                         <strong t-out="tot_dr"
                                                 t-options='{"widget": "monetary", "display_currency": company.currency_id}'/>
@@ -167,40 +178,55 @@
                                             </td>
                                         </tr>
 
-                                        <!-- Invoice header + product lines -->
+                                        <!-- Invoice header + product lines (single TR with nested table) -->
                                         <t t-if="data['form'].get('detailed') and line['invoice']">
                                             <tr class="table-info">
-                                                <td/>
-                                                <td>
-                                                    <strong>Invoice:</strong>
-                                                    <span t-out="line['invoice'].name"/>
-                                                </td>
-                                                <td>
-                                                    <strong>Untaxed:</strong>
-                                                    <span t-out="line['invoice'].amount_untaxed"
-                                                          t-options='{"widget": "monetary", "display_currency": line["invoice"].currency_id}'/>
-                                                </td>
-                                                <td colspan="2" class="text-end">
-                                                    <strong>Total:</strong>
-                                                    <span t-out="line['invoice'].amount_total"
-                                                          t-options='{"widget": "monetary", "display_currency": line["invoice"].currency_id}'/>
-                                                </td>
-                                            </tr>
-                                            <tr t-foreach="line['ilines']" t-as="iline" class="table-light">
-                                                <td/>
-                                                <td class="ps-4">
-                                                    <span t-out="iline.product_id.display_name or iline.name"/>
-                                                </td>
-                                                <td>
-                                                    Qty: <span t-out="iline.quantity"/>
-                                                </td>
-                                                <td>
-                                                    Unit: <span t-out="iline.price_unit"
-                                                                t-options='{"widget": "monetary", "display_currency": iline.currency_id}'/>
-                                                </td>
-                                                <td class="text-end">
-                                                    Subtotal: <span t-out="iline.price_subtotal"
-                                                                    t-options='{"widget": "monetary", "display_currency": iline.currency_id}'/>
+                                                <td colspan="5">
+                                                    <div class="d-flex justify-content-between mb-2">
+                                                        <div>
+                                                            <strong>Invoice:</strong>
+                                                            <span t-out="line['invoice'].name"/>
+                                                        </div>
+                                                        <div>
+                                                            <strong>Untaxed:</strong>
+                                                            <span t-out="line['invoice'].amount_untaxed"
+                                                                  t-options='{"widget": "monetary", "display_currency": line[&quot;invoice&quot;].currency_id}'/>
+                                                        </div>
+                                                        <div>
+                                                            <strong>Total:</strong>
+                                                            <span t-out="line['invoice'].amount_total"
+                                                                  t-options='{"widget": "monetary", "display_currency": line[&quot;invoice&quot;].currency_id}'/>
+                                                        </div>
+                                                    </div>
+                                                    <table class="table table-sm table-bordered mb-0">
+                                                        <thead class="table-light">
+                                                            <tr>
+                                                                <th>Product</th>
+                                                                <th class="text-end">Qty</th>
+                                                                <th class="text-end">Unit Price</th>
+                                                                <th class="text-end">Subtotal</th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr t-foreach="line['ilines']" t-as="iline">
+                                                                <td>
+                                                                    <span t-out="iline.product_id.display_name or iline.name"/>
+                                                                </td>
+                                                                <td class="text-end">
+                                                                    <span t-out="iline.quantity"/>
+                                                                    <span t-if="iline.product_uom_id" t-out="iline.product_uom_id.name"/>
+                                                                </td>
+                                                                <td class="text-end">
+                                                                    <span t-out="iline.price_unit"
+                                                                          t-options='{"widget": "monetary", "display_currency": iline.currency_id}'/>
+                                                                </td>
+                                                                <td class="text-end">
+                                                                    <span t-out="iline.price_subtotal"
+                                                                          t-options='{"widget": "monetary", "display_currency": iline.currency_id}'/>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
                                                 </td>
                                             </tr>
                                         </t>
